@@ -1,0 +1,154 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+
+	<PropertyGroup>
+		<!--Work around so the conditions work below-->
+		<TargetFrameworks>netstandard2.0;Xamarin.iOS10;Xamarin.TVOS10;MonoAndroid90;MonoAndroid10.0;</TargetFrameworks>
+		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.16299;</TargetFrameworks>
+		<!--Feel free to add as many targets as you need below
+    netstandard1.0;netstandard2.0;MonoAndroid90;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
+    For UWP update the version number with a version number you have installed.
+    -->
+		<AssemblyName>Plugin.Xamarin.Forms.PdfSharp</AssemblyName>
+		<RootNamespace>Plugin.Xamarin.Forms.PdfSharp</RootNamespace>
+		<PackageId>Xamarin.Forms.PdfSharp</PackageId>
+
+		<Product>$(AssemblyName) ($(TargetFramework))</Product>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+		<Version>1.0.0.0</Version>
+		<PackageVersion>1.0.0.0</PackageVersion>
+		<PackOnBuild>true</PackOnBuild>
+		<NeutralLanguage>en</NeutralLanguage>
+		<LangVersion>default</LangVersion>
+		<DefineConstants>$(DefineConstants);</DefineConstants>
+
+		<UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+		<LangVersion>latest</LangVersion>
+		<DebugType>portable</DebugType>
+
+		<!--TODO: Fill these in-->
+		<PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>LINK TO PROJECT</PackageProjectUrl>
+		<RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
+		<PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
+		<PackageIconUrl>ICON URL</PackageIconUrl>
+		<PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, Plugin.Xamarin.Forms.PdfSharp</PackageTags>
+
+		<Title>Plugin.Xamarin.Forms.PdfSharp Plugin for Xamarin and Windows</Title>
+		<Summary>Summary of nuget</Summary>
+		<Description>Plugin Description</Description>
+
+
+		<Owners>Emil Alipiev</Owners>
+		<Authors>Emil Alipiev</Authors>
+		<Copyright>Copyright 2020</Copyright>
+
+		<!--When built in 2019 will remove extra references on pack-->
+		<DisableExtraReferences>true</DisableExtraReferences>
+
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+		<DebugSymbols>true</DebugSymbols>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<!-- sourcelink: Embed source files that are not tracked by the source control manager to the PDB -->
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<!-- sourcelink: Include PDB in the built .nupkg -->
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(Configuration)'=='Release' ">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="**\Shared\*.cs" />
+		<Compile Include="**\Shared\**\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Shared\DefaultFonts\OpenSans-Bold.ttf">
+		  <Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Shared\DefaultFonts\OpenSans-BoldItalic.ttf">
+		  <Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Shared\DefaultFonts\OpenSans-Italic.ttf">
+		  <Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Shared\DefaultFonts\OpenSans-Regular.ttf">
+		  <Generator></Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Shared\Icons\search.png" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+		<Compile Include="**\UWP\*.cs" />
+
+		<!--
+    If you need to add sdk references:
+     <SDKReference Include="WindowsMobile, Version=10.0.16299.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+    -->
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+		<Compile Include="**\Android\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+		<Compile Include="**\Ios\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Xamarin.Forms.PdfSharp.Charts\Xamarin.Forms.PdfSharp.Charts.csproj" />
+	  <ProjectReference Include="..\Xamarin.Forms.PdfSharp.Core\Xamarin.Forms.PdfSharp.Core.csproj" />
+	</ItemGroup>
+ 
+
+
+	<!--Additional item groups-->
+	<!--
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
+    <Compile Include="**\*.tvos.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
+    <Compile Include="**\*.watchos.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+    <Compile Include="**\*.mac.cs" />
+  </ItemGroup>
+
+  
+   <ItemGroup Condition=" $(TargetFramework.StartsWith('netcoreapp')) ">
+    <Compile Include="**\*.netcore.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Tizen')) ">
+    <Compile Include="**\*.tizen.cs" />
+    <PackageReference Include="Tizen.NET" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net45')) ">
+    <Compile Include="**\*.dotnet.cs" />
+  </ItemGroup>
+  -->
+</Project>

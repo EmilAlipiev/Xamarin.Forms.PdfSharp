@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PdfSharp.Demo.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:pdf="clr-namespace:Plugin.Xamarin.Forms.PdfSharp;assembly=Plugin.Xamarin.Forms.PdfSharp">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid x:Name="mainGrid" MinimumHeightRequest="900">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--#region Titles-->
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource TitleStyle}"
+                Text="Label" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource TitleStyle}"
+                Text="Button" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Style="{StaticResource TitleStyle}"
+                Text="Entry" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource TitleStyle}"
+                Text="SearchBar" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource TitleStyle}"
+                Text="ProgressBar" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="2"
+                Style="{StaticResource TitleStyle}"
+                Text="Picker" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource TitleStyle}"
+                Text="Image" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource TitleStyle}"
+                Text="ContentView" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="2"
+                Style="{StaticResource TitleStyle}"
+                Text="Editor" />
+            <!--#endregion-->
+
+            <!--  Label  -->
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="0"
+                Spacing="6"
+                VerticalOptions="FillAndExpand">
+                <Label FontFamily="JostBold" Text="Plain text" />
+                <Label
+                    FontFamily="JostSemi"
+                    Text="Red color text"
+                    TextColor="Red" />
+                <Label
+                    BackgroundColor="Red"
+                    FontFamily="JostBold"
+                    Text="Black Text with Red Background" />
+                <Label
+                    FontFamily="JostSemi"
+                    HorizontalOptions="Center"
+                    Text="Text at the center" />
+            </StackLayout>
+
+            <!--  Button  -->
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="1"
+                Spacing="6">
+                <Button
+                    BackgroundColor="White"
+                    Text="Plain Button"
+                    TextColor="LightBlue" />
+                <Button
+                    BackgroundColor="White"
+                    BorderColor="Black"
+                    BorderWidth="3"
+                    Text="Button with Border"
+                    TextColor="LightBlue" />
+                <Button
+                    BackgroundColor="Red"
+                    BorderColor="Black"
+                    BorderWidth="3"
+                    Text="Button with Border and Red Background"
+                    TextColor="LightBlue" />
+            </StackLayout>
+
+            <!--  Entry  -->
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="2"
+                Spacing="6">
+                <Entry Text="this is sample entry" />
+                <Entry Placeholder="entry with placeholder" />
+                <Entry BackgroundColor="Red" Text="Entry with Red Background" />
+            </StackLayout>
+
+            <!--  SearchBar  -->
+            <StackLayout
+                Grid.Row="3"
+                Grid.Column="0"
+                Spacing="6">
+                <SearchBar Text="SearchBar" />
+                <forms:SvgCachedImage
+                    HeightRequest="64"
+                    Source="resource://PdfSharp.Demo.signup.svg"
+                    WidthRequest="64" />
+            </StackLayout>
+
+            <ProgressBar
+                Grid.Row="3"
+                Grid.Column="1"
+                Progress="0.7"
+                VerticalOptions="Center" />
+
+            <Picker
+                x:Name="picker"
+                Grid.Row="3"
+                Grid.Column="2"
+                HorizontalOptions="Center"
+                SelectedIndex="0"
+                VerticalOptions="Center" />
+
+            <Image
+                Grid.Row="5"
+                Grid.Column="0"
+                Source="test.jpg" />
+
+            <!--  ContentView  -->
+            <ContentView
+                Grid.Row="5"
+                Grid.Column="1"
+                Margin="20"
+                BackgroundColor="Orange">
+                <Label
+                    FontFamily="JostSemi"
+                    HorizontalOptions="Center"
+                    Text="This is text inside an orange ContentView"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+            </ContentView>
+
+            <Editor
+                Grid.Row="5"
+                Grid.Column="2"
+                Text="Lorem ipsum dolor sit amet" />
+
+
+            <Button
+                Grid.Row="6"
+                Grid.Column="1"
+                pdf:PdfRendererAttributes.ShouldRender="False"
+                Clicked="GeneratePDF"
+                HorizontalOptions="Center"
+                Text="Generate PDF" />
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

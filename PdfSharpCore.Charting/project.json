@@ -1,0 +1,15 @@
+﻿{
+  "supports": {},
+  "dependencies": {
+    "Microsoft.Net.Compilers": "2.0.1",
+    "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
+    "NETStandard.Library": "1.6.1",
+    "System.Collections.NonGeneric": "4.3.0",
+    "System.ComponentModel.Primitives": "4.3.0",
+    "System.Reflection.TypeExtensions": "4.3.0",
+    "System.Runtime.Serialization.Formatters": "4.3.0"
+  },
+  "frameworks": {
+    "netstandard1.4": {}
+  }
+}
